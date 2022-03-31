@@ -16,26 +16,26 @@ $USUARIO = 'eduardo.garcia';
 
 
 //VERIFICO o CARGO DO USUARIO
-$q_cargo = "SELECT ID_CARGO FROM USUARIOS WHERE USUARIO = 'eduardo.garcia'";
+$q_cargo = "SELECT ID_CARGO, ID FROM USUARIOS WHERE USUARIO = 'eduardo.garcia'";
 $r_cargo = mysqli_query($con,$q_cargo);
 $cargodata = mysqli_fetch_assoc($r_cargo);
 $id_cargo = $cargodata['ID_CARGO'];
+$id_usuario = $cargodata['ID'];
 
 
-exit;
+
 $q_menu = "SELECT * FROM MENUS WHERE STATUS = 'Ativo'";
 $r_menu=mysqli_query($con,$q_menu);
 while($menudata = mysqli_fetch_assoc($r_menu)){
 
 $menu_id = $menudata['ID'];
 
-
 $submenulistqry = "SELECT * FROM SUB_MENUS
 INNER JOIN MENU_CARGOS ON MENU_CARGOS.ID_SUB_MENU = SUB_MENUS.ID
 WHERE MC_STATUS = 'Ativo' 
 AND SUB_MENUS.ID_MENU = '$menu_id' 
-AND SUB_MENU.ID IN (SELECT ID_SUB_MENU FROM MENU_USUARIOS
-							WHERE USUARIO = '$USUARIO'
+AND SUB_MENUS.ID IN (SELECT ID_SUB_MENU FROM MENU_USUARIOS
+							WHERE ID_USUARIO = '$id_usuario'
 							AND PERMISSAO = 'True'
               AND ID_MENU = '$menu_id')
 AND MENU_CARGOS.ID_CARGO = '$id_cargo' 
@@ -60,16 +60,6 @@ while($submenulistdata=mysqli_fetch_assoc($submenulistres))
       </li>
 <?php }} ?>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Setting
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="menu_add.php">Add Menu</a>
-          <a class="dropdown-item" href="submenu_add.php">Add Sub Menu</a>
-          <a class="dropdown-item" href="user_permission.php">Permission</a>
-        </div>
-      </li>
     </ul>
   </div>
 </nav>
