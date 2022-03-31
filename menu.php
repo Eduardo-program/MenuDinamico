@@ -24,7 +24,7 @@ $id_usuario = $cargodata['ID'];
 
 
 
-$q_menu = "SELECT * FROM MENUS WHERE STATUS = 'Ativo'";
+$q_menu = "SELECT * FROM MENUS WHERE ME_STATUS = 'Ativo'";
 $r_menu=mysqli_query($con,$q_menu);
 while($menudata = mysqli_fetch_assoc($r_menu)){
 
