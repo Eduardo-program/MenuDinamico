@@ -16,7 +16,7 @@ $USUARIO = 'eduardo.garcia';
 
 
 //VERIFICO o CARGO DO USUARIO
-$q_cargo = "SELECT ID_CARGO, ID FROM USUARIOS WHERE USUARIO = 'eduardo.garcia'";
+$q_cargo = "SELECT ID_CARGO, ID FROM USUARIOS WHERE USUARIO = '$USUARIO'";
 $r_cargo = mysqli_query($con,$q_cargo);
 $cargodata = mysqli_fetch_assoc($r_cargo);
 $id_cargo = $cargodata['ID_CARGO'];
@@ -60,6 +60,16 @@ while($submenulistdata=mysqli_fetch_assoc($submenulistres))
       </li>
 <?php }} ?>
 
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Configurações
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="cadastrar_menu.php">Adicionar Menu</a>
+          <a class="dropdown-item" href="cadastrar_submenu.php">Adicionar SubMenu</a>
+          <a class="dropdown-item" href="permissoes_usuarios.php">Permissões</a>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>
