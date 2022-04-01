@@ -64,6 +64,7 @@ while($submenulistdata=mysqli_fetch_assoc($submenulistres))
           <a class="dropdown-item" href="cadastrar_menu.php">Adicionar Menu</a>
           <a class="dropdown-item" href="cadastrar_submenu.php">Adicionar SubMenu</a>
           <a class="dropdown-item" href="permissoes_usuarios.php">Permissões</a>
+          <a class="dropdown-item" href="cadastrar_fonte.php">Fontes</a>
         </div>
       </li>
     </ul>
