@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Abr-2022 às 22:04
+-- Tempo de geração: 01-Abr-2022 às 16:34
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -43,80 +43,13 @@ INSERT INTO `cargos` (`ID`, `DESCRICAO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `fontes`
---
-
-CREATE TABLE `fontes` (
-  `ID` int(11) NOT NULL,
-  `ID_MENU` int(11) NOT NULL,
-  `DESCRICAO` varchar(50) NOT NULL,
-  `ENDERECO` varchar(50) NOT NULL,
-  `FO_STATUS` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `fontes`
---
-
-INSERT INTO `fontes` (`ID`, `ID_MENU`, `DESCRICAO`, `ENDERECO`, `FO_STATUS`) VALUES
-(1, 8, 'Vendas por Dia', '#', 'Ativo'),
-(2, 2, 'Novo Código', '#', 'Ativo'),
-(3, 10, 'Nova Venda', '#', 'Ativo');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `fonte_cargos`
---
-
-CREATE TABLE `fonte_cargos` (
-  `ID` int(11) NOT NULL,
-  `ID_FONTE` int(11) NOT NULL,
-  `ID_USUARIO` int(11) NOT NULL,
-  `FC_STATUS` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `fonte_cargos`
---
-
-INSERT INTO `fonte_cargos` (`ID`, `ID_FONTE`, `ID_USUARIO`, `FC_STATUS`) VALUES
-(1, 1, 1, 'Ativo'),
-(2, 2, 1, 'Ativo'),
-(3, 3, 1, 'Ativo');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `fonte_usuarios`
---
-
-CREATE TABLE `fonte_usuarios` (
-  `ID` int(11) NOT NULL,
-  `ID_FONTE` int(11) NOT NULL,
-  `ID_USUARIO` int(11) NOT NULL,
-  `PERMISSAO` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Extraindo dados da tabela `fonte_usuarios`
---
-
-INSERT INTO `fonte_usuarios` (`ID`, `ID_FONTE`, `ID_USUARIO`, `PERMISSAO`) VALUES
-(4, 1, 1, 'True'),
-(5, 2, 1, 'True'),
-(6, 3, 1, 'True');
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `menus`
 --
 
 CREATE TABLE `menus` (
   `ID` int(11) NOT NULL,
-  `ID_PAI` int(11) NOT NULL,
   `DESCRICAO` varchar(50) NOT NULL,
+  `ICONE` varchar(50) NOT NULL,
   `ME_STATUS` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -124,14 +57,16 @@ CREATE TABLE `menus` (
 -- Extraindo dados da tabela `menus`
 --
 
-INSERT INTO `menus` (`ID`, `ID_PAI`, `DESCRICAO`, `ME_STATUS`) VALUES
-(1, 0, 'Cadastros', 'Ativo'),
-(2, 1, 'Produtos', 'Ativo'),
-(3, 0, 'Relatórios', 'Ativo'),
-(4, 3, 'Estoque', 'Ativo'),
-(8, 3, 'Vendas', 'Ativo'),
-(9, 1, 'Código', 'Ativo'),
-(10, 0, 'Devoluções', 'Ativo');
+INSERT INTO `menus` (`ID`, `DESCRICAO`, `ICONE`, `ME_STATUS`) VALUES
+(1, 'Cadastros', '#', 'Ativo'),
+(2, 'Produtos', '#', 'Ativo'),
+(3, 'Relatórios', '#', 'Ativo'),
+(4, 'Estoque', '#', 'Ativo'),
+(8, 'Opção de Teste', '#', 'Ativo'),
+(9, 'Eduardo', '#', 'Ativo'),
+(10, 'Teste', '#', 'Ativo'),
+(11, 'Henrique', '', 'Ativo'),
+(12, 'Eduardo', '', 'Ativo');
 
 -- --------------------------------------------------------
 
@@ -142,6 +77,7 @@ INSERT INTO `menus` (`ID`, `ID_PAI`, `DESCRICAO`, `ME_STATUS`) VALUES
 CREATE TABLE `menu_cargos` (
   `ID` int(11) NOT NULL,
   `ID_MENU` int(11) NOT NULL,
+  `ID_SUB_MENU` int(11) NOT NULL,
   `ID_CARGO` int(11) NOT NULL,
   `MC_STATUS` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -150,17 +86,21 @@ CREATE TABLE `menu_cargos` (
 -- Extraindo dados da tabela `menu_cargos`
 --
 
-INSERT INTO `menu_cargos` (`ID`, `ID_MENU`, `ID_CARGO`, `MC_STATUS`) VALUES
-(24, 1, 1, 'Ativo'),
-(25, 2, 1, 'Ativo'),
-(26, 3, 1, 'Ativo'),
-(27, 4, 1, 'Ativo'),
-(28, 5, 1, 'Ativo'),
-(29, 6, 1, 'Ativo'),
-(30, 7, 1, 'Ativo'),
-(31, 8, 1, 'Ativo'),
-(32, 9, 1, 'Ativo'),
-(33, 10, 1, 'Ativo');
+INSERT INTO `menu_cargos` (`ID`, `ID_MENU`, `ID_SUB_MENU`, `ID_CARGO`, `MC_STATUS`) VALUES
+(1, 1, 1, 1, 'Ativo'),
+(2, 1, 2, 1, 'Ativo'),
+(3, 2, 3, 1, 'Ativo'),
+(4, 2, 4, 1, 'Ativo'),
+(5, 3, 5, 1, 'Ativo'),
+(6, 3, 6, 1, 'Ativo'),
+(7, 3, 7, 1, 'Ativo'),
+(8, 4, 8, 1, 'Ativo'),
+(17, 1, 15, 1, 'Ativo'),
+(18, 3, 16, 1, 'Ativo'),
+(19, 4, 17, 2, 'Ativo'),
+(20, 11, 18, 1, 'Ativo'),
+(21, 11, 18, 2, 'Ativo'),
+(22, 12, 19, 1, 'Ativo');
 
 -- --------------------------------------------------------
 
@@ -171,6 +111,7 @@ INSERT INTO `menu_cargos` (`ID`, `ID_MENU`, `ID_CARGO`, `MC_STATUS`) VALUES
 CREATE TABLE `menu_usuarios` (
   `ID` int(11) NOT NULL,
   `ID_MENU` int(11) NOT NULL,
+  `ID_SUB_MENU` int(11) NOT NULL,
   `ID_USUARIO` int(11) NOT NULL,
   `PERMISSAO` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -179,17 +120,53 @@ CREATE TABLE `menu_usuarios` (
 -- Extraindo dados da tabela `menu_usuarios`
 --
 
-INSERT INTO `menu_usuarios` (`ID`, `ID_MENU`, `ID_USUARIO`, `PERMISSAO`) VALUES
-(18, 1, 1, 'True'),
-(19, 2, 1, 'True'),
-(20, 3, 1, 'True'),
-(21, 4, 1, 'True'),
-(22, 5, 1, 'True'),
-(23, 6, 1, 'True'),
-(24, 7, 1, 'True'),
-(25, 8, 1, 'True'),
-(26, 9, 1, 'True'),
-(27, 10, 1, 'True');
+INSERT INTO `menu_usuarios` (`ID`, `ID_MENU`, `ID_SUB_MENU`, `ID_USUARIO`, `PERMISSAO`) VALUES
+(1, 1, 1, 1, 'False'),
+(2, 1, 2, 1, 'False'),
+(3, 2, 3, 1, 'True'),
+(4, 2, 4, 1, 'True'),
+(5, 3, 5, 1, 'True'),
+(6, 3, 6, 1, 'True'),
+(7, 3, 7, 1, 'True'),
+(8, 4, 8, 1, 'True'),
+(11, 1, 15, 1, 'False'),
+(12, 3, 16, 1, 'True'),
+(13, 4, 17, 2, 'True'),
+(15, 11, 18, 2, 'True'),
+(16, 12, 19, 1, 'True');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `sub_menus`
+--
+
+CREATE TABLE `sub_menus` (
+  `ID` int(11) NOT NULL,
+  `ID_MENU` int(11) NOT NULL,
+  `DESCRICAO` varchar(50) NOT NULL,
+  `ENDERECO` varchar(50) NOT NULL,
+  `SM_STATUS` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `sub_menus`
+--
+
+INSERT INTO `sub_menus` (`ID`, `ID_MENU`, `DESCRICAO`, `ENDERECO`, `SM_STATUS`) VALUES
+(1, 1, 'Novo Produto', '#', 'Ativo'),
+(2, 1, 'Editar Produto', '#', 'Ativo'),
+(3, 2, 'Emitir Venda', '#', 'Ativo'),
+(4, 2, 'Devolução', '#', 'Ativo'),
+(5, 3, 'Vendas Mês', '#', 'Ativo'),
+(6, 3, 'Vendas Semestre', '#', 'Ativo'),
+(7, 3, 'Venda por Código', '#', 'Ativo'),
+(8, 4, 'Lançar Nota Fiscal', '#', 'Ativo'),
+(15, 1, 'Novo Código', '#', 'Ativo'),
+(16, 3, 'Compras', 'http://localhost/phpmyadmin/index.php?route=/sql&s', 'Ativo'),
+(17, 4, 'Acerto', '#', 'Ativo'),
+(18, 11, 'Henrique 2', '#', 'Ativo'),
+(19, 12, 'Eduardo 2', '', 'Ativo');
 
 -- --------------------------------------------------------
 
@@ -223,24 +200,6 @@ ALTER TABLE `cargos`
   ADD PRIMARY KEY (`ID`);
 
 --
--- Índices para tabela `fontes`
---
-ALTER TABLE `fontes`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Índices para tabela `fonte_cargos`
---
-ALTER TABLE `fonte_cargos`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Índices para tabela `fonte_usuarios`
---
-ALTER TABLE `fonte_usuarios`
-  ADD PRIMARY KEY (`ID`);
-
---
 -- Índices para tabela `menus`
 --
 ALTER TABLE `menus`
@@ -256,6 +215,12 @@ ALTER TABLE `menu_cargos`
 -- Índices para tabela `menu_usuarios`
 --
 ALTER TABLE `menu_usuarios`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Índices para tabela `sub_menus`
+--
+ALTER TABLE `sub_menus`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -275,24 +240,6 @@ ALTER TABLE `cargos`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de tabela `fontes`
---
-ALTER TABLE `fontes`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `fonte_cargos`
---
-ALTER TABLE `fonte_cargos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `fonte_usuarios`
---
-ALTER TABLE `fonte_usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
 -- AUTO_INCREMENT de tabela `menus`
 --
 ALTER TABLE `menus`
@@ -302,13 +249,19 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT de tabela `menu_cargos`
 --
 ALTER TABLE `menu_cargos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de tabela `menu_usuarios`
 --
 ALTER TABLE `menu_usuarios`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT de tabela `sub_menus`
+--
+ALTER TABLE `sub_menus`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
