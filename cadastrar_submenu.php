@@ -23,7 +23,7 @@
 						<?php
 						include 'conexao.php';
 						$menulistqry="SELECT SUB_MENUS.*, MENUS.DESCRICAO AS MENU_DESC FROM SUB_MENUS INNER JOIN MENUS ON MENUS.ID = SUB_MENUS.ID_MENU 
-						WHERE SM_STATUS = 'Ativo'";
+						WHERE SM_STATUS = 'Ativo' ORDER BY MENUS.DESCRICAO";
 						$menulistres=mysqli_query($con,$menulistqry);
 						while ($menudata=mysqli_fetch_assoc($menulistres)) {
 						?>
@@ -43,7 +43,7 @@
 </div>
 
 <div class="col-md-6">
-<h4>Sub Menu Add</h4>
+<h4>Adicionar Sub Menu</h4>
 <hr>
 	<form method="post" action="adicionar_submenu.php">
 	<div class="form-group">

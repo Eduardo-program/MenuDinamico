@@ -10,7 +10,7 @@
 require 'procedimentos.php';
 require 'conexao.php';
 
-// CHUNBADO USUARIO --------
+// CHUMBADO USUARIO --------
 $USUARIO = 'eduardo.garcia';
 // -------------------------
 
