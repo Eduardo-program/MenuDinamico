@@ -1,5 +1,9 @@
 <?php
 
+// CHUMBADO USUARIO --------
+$USUARIO = 'eduardo.garcia';
+// -------------------------
+
 $con = mysqli_connect('localhost',
                     'root',
                     '',

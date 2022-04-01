@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<?php include 'head.php';
-include 'database.php';
-$user_id=3;
+<?php include 'cabecalho.php';
+include 'conexao.php';
+
 ?>
 <body>
 <?php include 'menu.php';?>

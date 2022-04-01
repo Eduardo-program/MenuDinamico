@@ -10,10 +10,6 @@
 require 'procedimentos.php';
 require 'conexao.php';
 
-// CHUMBADO USUARIO --------
-$USUARIO = 'eduardo.garcia';
-// -------------------------
-
 
 //VERIFICO o CARGO DO USUARIO
 $q_cargo = "SELECT ID_CARGO, ID FROM USUARIOS WHERE USUARIO = '$USUARIO'";
