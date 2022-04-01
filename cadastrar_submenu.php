@@ -45,7 +45,7 @@
 <div class="col-md-6">
 <h4>Sub Menu Add</h4>
 <hr>
-	<form method="post" action="submenu_adddb.php">
+	<form method="post" action="adicionar_submenu.php">
 	<div class="form-group">
 	<select class="form-control" name="menu_id">
 		<option value="">Selecionar Menu</option>
