@@ -3,6 +3,8 @@
 <?php include 'cabecalho.php';
 include 'conexao.php';
 
+$user_id = $_POST['user_id'];
+
 ?>
 <body>
 <?php include 'menu.php';?>
@@ -10,47 +12,41 @@ include 'conexao.php';
 <div class="container">
 <div class="row">
 <div class="col-md-12">
-<h4>User Permission</h4>
+<h4>User Regras</h4>
 
-<form method="post" action="user_permission_db.php">
+<form method="post" action="altera_permissoes.php">
 <input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 <table class="table">
 <thead>
 <tr>
 <th>Menu</th>
 <th>Sub Menu</th>
-<th>Permission</th>
+<th>Permissão</th>
 </tr>
 </thead>
 <tbody>
 <?php
-$menuqry="SELECT * from sub_menu 
-		 inner join menu on menu.menu_id=sub_menu.menu_id 
-		 where submenu_status='Enable'";
+$menuqry="SELECT MENU_USUARIOS.*, SUB_MENUS.DESCRICAO AS SM_DE, MENUS.DESCRICAO AS M_DE
+		 FROM MENU_USUARIOS
+		 INNER JOIN MENUS ON MENUS.ID = MENU_USUARIOS.ID_MENU
+		 INNER JOIN SUB_MENUS ON SUB_MENUS.ID = MENU_USUARIOS.ID_SUB_MENU  
+		 WHERE ID_USUARIO = '$user_id'";
 $menures=mysqli_query($con,$menuqry);
 while ($menudata=mysqli_fetch_assoc($menures)) {
 ?>
-<input type="hidden" name="menu_id[]" value="<?php echo $menudata['menu_id'];?>">
-<input type="hidden" name="submenu_id[]" value="<?php echo $submenuid=$menudata['submenu_id'];?>">
+<input type="hidden" name="menu_id[]" value="<?php echo $menudata['ID_MENU'];?>">
+<input type="hidden" name="submenu_id[]" value="<?php echo $submenuid=$menudata['ID_SUB_MENU'];?>">
 <tr>
-	<td><?php echo $menudata['menu_name'];?></td>
-	<td><?php echo $menudata['submenu_name'];?></td>
+	<td><?php echo $menudata['M_DE'];?></td>
+	<td><?php echo $menudata['SM_DE'];?></td>
 	<td>
-		<?php
-		$permissionqry="SELECT user_permission from menu_useraccess where sub_menu_id='$submenuid' AND user_id='$user_id'";
-		$permissionres=mysqli_query($con,$permissionqry);
-		$permissiondata=mysqli_fetch_assoc($permissionres);
-		$user_permission=$permissiondata['user_permission'];
-		?>
 		<select name="user_permission[]" class="form-control">
-			<?php
-			if($user_permission)
-			{
-			?><option value="<?php echo $user_permission;?>"><?php echo $user_permission;?></option>
-			<?php
-			}?>
-			<option value="False">False</option>
-			<option value="True">True</option>
+			<option value="<?php echo $menudata['PERMISSAO'];?>"><?php echo $menudata['PERMISSAO'] == 'True' ? "Liberado" : "Bloqueado";?></option>
+			<?php if($menudata['PERMISSAO'] == 'True'){ ?>
+			<option value="False">Bloquear</option>
+			<?php }else{ ?>
+			<option value="True">Liberar</option>
+			<?php } ?>
 		</select>
 	</td>
 </tr>
@@ -59,11 +55,11 @@ while ($menudata=mysqli_fetch_assoc($menures)) {
 ?>
 </tbody>
 </table>
-<input type="submit" name="permissionsubmit" class="btn btn-primary" value="Update">
+<input type="submit" name="permissionsubmit" class="btn btn-primary" value="Alterar Permissões">
 </form>
 </div>
 </div>
 </div>
-<?php include 'footer.php';?>
+<?php include 'dependencias.php';?>
 </body>
 </html>
