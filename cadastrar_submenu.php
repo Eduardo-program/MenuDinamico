@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html>
-<?php include 'head.php';?>
+<?php include 'cabecalho.php';?>
 <body>
 <?php include 'menu.php';?>
-<?php include 'database.php';?>
+<?php include 'conexao.php';?>
 <div class="container">
 <div class="row">
 <div class="col-md-6">
-<h4>Sub Menu List</h4>
+<h4>Lista de SubMenus</h4>
 <hr>
 <div class="table-responsive">
 <table class="table table-bordered">
 				<thead>
 					<tr>
-						<th>S.No</th>
-						<th>Menu Name</th>
-						<th>Sub Menu Name</th>
-						<th>Sub Menu Url</th>
-						<th>Sub Menu Order</th>
+						<th>ID</th>
+						<th>Menu</th>
+						<th>Sub Menu Desc</th>
+						<th>Sub Menu Endereço</th>
 					</tr>
 				</thead>
 				<tbody>
 						<?php
-						include 'database.php';
-						$menulistqry="SELECT sub_menu.*,menu.menu_name from sub_menu inner join menu on menu.menu_id=sub_menu.menu_id 
-						where submenu_status='Enable'";
+						include 'conexao.php';
+						$menulistqry="SELECT SUB_MENUS.*, MENUS.DESCRICAO AS MENU_DESC FROM SUB_MENUS INNER JOIN MENUS ON MENUS.ID = SUB_MENUS.ID_MENU 
+						WHERE SM_STATUS = 'Ativo'";
 						$menulistres=mysqli_query($con,$menulistqry);
 						while ($menudata=mysqli_fetch_assoc($menulistres)) {
 						?>
 						<tr>
-							<td><?php echo $menudata['submenu_id'];?></td>
-							<td><?php echo $menudata['menu_name'];?></td>
-							<td><?php echo $menudata['submenu_name'];?></td>
-							<td><?php echo $menudata['submenu_url'];?></td>
-							<td><?php echo $menudata['submenu_order'];?></td>
+							<td><?php echo $menudata['ID'];?></td>
+							<td><?php echo $menudata['MENU_DESC'];?></td>
+							<td><?php echo $menudata['DESCRICAO'];?></td>
+							<td><?php echo $menudata['ENDERECO'];?></td>
 						</tr>
 						<?php
 						}
@@ -50,69 +48,53 @@
 	<form method="post" action="submenu_adddb.php">
 	<div class="form-group">
 	<select class="form-control" name="menu_id">
-		<option value="">Select Menu</option>
+		<option value="">Selecionar Menu</option>
 		<?php
-		$menulistqry="SELECT * from menu where menu_status='Enable'";
+		$menulistqry="SELECT * FROM MENUS WHERE ME_STATUS = 'Ativo'";
 		$menulistres=mysqli_query($con,$menulistqry);
 		while ($menudata=mysqli_fetch_assoc($menulistres)) {
 		?>
-		<option value="<?php echo $menudata['menu_id'];?>"><?php echo $menudata['menu_name'];?></option>
+		<option value="<?php echo $menudata['ID'];?>"><?php echo $menudata['DESCRICAO'];?></option>
 	<?php } ?>
 	</select>
 	</div>
 
 	<div class="form-group">
-	<input type="text" name="submenu_name" placeholder="Sub Menu Name" class="form-control" />
+	<input type="text" name="submenu_name" placeholder="Descrição SubMenu" class="form-control" />
 	</div>
 
 	<div class="form-group">
-	<input type="text" name="submenu_url" placeholder="Sub Menu Url" class="form-control" />
+	<input type="text" name="submenu_url" placeholder="Endereço/Nome do Fonte" class="form-control" />
 	</div>
 
 	<div class="form-group">
 	<select class="form-control" name="submenu_display">
-		<option value="Yes">Yes</option>
-		<option value="No">No</option>
+		<option value="Yes">Selecione se Está Ativo</option>
+		<option value="Ativo">Ativo</option>
+		<option value="Desativo">Desativado</option>
 	</select>
 	</div>
 
 	<div class="form-group">
-	<select class="form-control" name="is_submenu">
-		<option value="Yes">Sim</option>
-		<option value="No">Não</option>
-	</select>
-	</div>
-
-	<div class="form-group">
-	<select class="form-control" name="submenu_order">
-		<?php
-		for ($i=0; $i < 10; $i++) { 
-		?>
-		<option value="<?php echo $i;?>"><?php echo $i;?></option>
-	<?php } ?>
-	</select>
-	</div>
-
-	<div class="form-group">
+		<a>Grupos de Usuário:</a>
 	<select class="form-control" name="department_id[]" multiple>
-		<option value="">Select Department</option>
 		<?php
-		$deptlistqry="SELECT * from department where department_status='Enable'";
+		$deptlistqry="SELECT * FROM CARGOS";
 		$deptlistres=mysqli_query($con,$deptlistqry);
 		while ($deptdata=mysqli_fetch_assoc($deptlistres)) {
 		?>
-		<option value="<?php echo $deptdata['department_id'];?>"><?php echo $deptdata['department_name'];?></option>
+		<option value="<?php echo $deptdata['ID'];?>"><?php echo $deptdata['DESCRICAO'];?></option>
 	<?php } ?>
 	</select>
 	</div>
 	
 	<div class="form-group">
-	<input name="submenu_submit" class="btn btn-primary" type="submit" value="Add Sub Menu"/>
+	<input name="submenu_submit" class="btn btn-primary" type="submit" value="Adicionar"/>
 	</div>
 	</form>
 </div>
 </div>
 </div>
-<?php include 'footer.php';?>
+<?php include 'dependencias.php';?>
 </body>
 </html>

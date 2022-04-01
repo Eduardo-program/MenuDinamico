@@ -9,7 +9,7 @@ if(isset($_POST['menu_submit']))
 
 	if( $descricao != '' )
 	{
-		$insertqry="INSERT INTO `MENUS`( `DESCRICAO`, `ICONE`) VALUES ('$descricao','$icone')";
+		$insertqry="INSERT INTO `MENUS`( `DESCRICAO`, `ICONE`, `ME_STATUS`) VALUES ('$descricao','$icone','$status')";
 		$insertres = mysqli_query($con,$insertqry);
 	}
 }
