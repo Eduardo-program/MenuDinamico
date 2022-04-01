@@ -7,7 +7,7 @@
 <div class="container">
 <div class="row">
 <div class="col-md-6">
-<h4>Lista de SubMenus</h4>
+<h4>Lista de Fontes Cadastrados</h4>
 <hr>
 <div class="table-responsive">
 <table class="table table-bordered">

@@ -16,7 +16,6 @@
 						<th>ID</th>
 						<th>Menu</th>
 						<th>Sub Menu Desc</th>
-						<th>Sub Menu Endereço</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,7 +30,6 @@
 							<td><?php echo $menudata['ID'];?></td>
 							<td><?php echo $menudata['MENU_DESC'];?></td>
 							<td><?php echo $menudata['DESCRICAO'];?></td>
-							<td><?php echo $menudata['ENDERECO'];?></td>
 						</tr>
 						<?php
 						}
@@ -61,10 +59,6 @@
 
 	<div class="form-group">
 	<input type="text" name="submenu_name" placeholder="Descrição SubMenu" class="form-control" />
-	</div>
-
-	<div class="form-group">
-	<input type="text" name="submenu_url" placeholder="Endereço/Nome do Fonte" class="form-control" />
 	</div>
 
 	<div class="form-group">

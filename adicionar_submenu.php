@@ -5,12 +5,11 @@ if(isset($_POST['submenu_submit']))
 {
 	$menu_id=$_POST['menu_id'];
 	$submenu_name=$_POST['submenu_name'];
-	$submenu_url=$_POST['submenu_url'];
 	$status=$_POST['submenu_display'];
 
 	if($submenu_name!='')
 	{
-		$insertqry="INSERT INTO `SUB_MENUS`( `ID_MENU`, `DESCRICAO`, `ENDERECO`, `SM_STATUS`) VALUES ('$menu_id','$submenu_name','$submenu_url','$status')";
+		$insertqry="INSERT INTO `SUB_MENUS`( `ID_MENU`, `DESCRICAO`, `SM_STATUS`) VALUES ('$menu_id','$submenu_name','$status')";
 		$insertres=mysqli_query($con,$insertqry);
 
 		$lastid=$con->insert_id;
